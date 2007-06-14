@@ -1,9 +1,6 @@
 %define pkgname	autoconf
 %define version	2.13
-%define release %mkrel 25
-
-# Factorize uses of autoconf libdir home and handle only one exception in rpmlint
-%define scriptdir %{_datadir}/autotools
+%define release %mkrel 26
 
 # Define the Fortran compiler
 %if %{mdkversion} >= 200600
@@ -29,7 +26,6 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
 
 Source:		ftp://ftp.gnu.org/pub/gnu/%{pkgname}/%{pkgname}-%{version}.tar.bz2
-Source3:	autoconf_special_readme2.1
 Patch0:		autoconf-2.12-race.patch
 Patch1:		autoconf-2.13-mawk.patch
 Patch2:		autoconf-2.13-notmp.patch
@@ -41,10 +37,7 @@ Patch6:		autoconf-2.13-gfortran.patch
 Prereq:		/sbin/install-info
 Requires:	gawk, m4, mktemp
 BuildRequires:	texinfo m4
-Requires:	%{scriptdir}/ac-wrapper.pl
 Conflicts:	autoconf2.5 <= 1:2.59-3mdk
-Obsoletes:	autoconf <= 1:2.13-19mdk
-Provides:	autoconf = %{epoch}:%{version}-%{release}
 
 # for tests
 %if %docheck
@@ -68,8 +61,6 @@ may be configuring software with an Autoconf-generated script;
 Autoconf is only required for the generation of the scripts, not
 their use.
 
-%{expand:%(cat %{SOURCE3})}
-
 %prep
 %setup -q -n %{pkgname}-%{version}
 %patch0 -p1
@@ -83,8 +74,6 @@ case %{fortran_compiler} in
 %patch6 -p1 -b .gfortran
 ;;
 esac
-
-install -m 644 %{SOURCE3} IMPORTANT.README.MDK
 
 %build
 export F77=%{fortran_compiler}
@@ -118,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc README IMPORTANT.README.MDK
+%doc README
 %{_bindir}/*
 %{_datadir}/%{pkgname}
 %{_infodir}/*
