@@ -34,7 +34,8 @@ Patch4:		autoconf-2.13-versioned-info.patch
 Patch5:		autoconf-2.13-automake14.patch
 Patch6:		autoconf-2.13-gfortran.patch
 
-Prereq:		/sbin/install-info
+Requires(post):	info-install
+Requires(preun):	info-install
 Requires:	gawk, m4, mktemp
 BuildRequires:	texinfo m4
 Conflicts:	autoconf2.5 <= 1:2.59-3mdk
