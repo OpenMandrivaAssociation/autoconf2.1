@@ -15,7 +15,7 @@ BuildRequires: gcc-g77
 %{?_without_check: %global docheck 0}
 
 Name:		%{pkgname}2.1
-Summary:	A GNU tool for automatically configuring source code.
+Summary:	A GNU tool for automatically configuring source code
 Version:	%{version}
 Release:	%{release}
 Epoch:		1
