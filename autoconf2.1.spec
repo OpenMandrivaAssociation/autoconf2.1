@@ -1,6 +1,6 @@
 %define pkgname	autoconf
 %define version	2.13
-%define release %mkrel 26
+%define release %mkrel 27
 
 # Define the Fortran compiler
 %if %{mdkversion} >= 200600
