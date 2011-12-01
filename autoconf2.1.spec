@@ -86,19 +86,19 @@ make check	# VERBOSE=1
 %endif
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall
 
-mv $RPM_BUILD_ROOT%{_infodir}/autoconf.info $RPM_BUILD_ROOT%{_infodir}/autoconf-%{version}.info
+mv %{buildroot}%{_infodir}/autoconf.info %{buildroot}%{_infodir}/autoconf-%{version}.info
 
 # We don't want to include the standards.info stuff in the package,
 # because it comes from binutils...
-rm -f $RPM_BUILD_ROOT%{_infodir}/standards*
+rm -f %{buildroot}%{_infodir}/standards*
 
-cp install-sh $RPM_BUILD_ROOT%{_datadir}/autoconf
+cp install-sh %{buildroot}%{_datadir}/autoconf
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %_install_info autoconf-%{version}.info
