@@ -1,28 +1,16 @@
-%define pkgname	autoconf
-%define version	2.13
-%define release %mkrel 32
-
-# Define the Fortran compiler
-%if %{mdkversion} >= 200600
-%define fortran_compiler gfortran
-BuildRequires: gcc-gfortran
-%else
-%define fortran_compiler g77
-BuildRequires: gcc-g77
-%endif
+%define pkgname autoconf
 
 %define docheck 1
 %{?_without_check: %global docheck 0}
 
 Name:		%{pkgname}2.1
 Summary:	A GNU tool for automatically configuring source code
-Version:	%{version}
-Release:	%{release}
+Version:	2.13
+Release:	33
 Epoch:		1
 License:	GPL
 Group:		Development/Other
 URL:		http://www.gnu.org/software/autoconf/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
 
 Source:		ftp://ftp.gnu.org/pub/gnu/%{pkgname}/%{pkgname}-%{version}.tar.bz2
@@ -34,14 +22,14 @@ Patch4:		autoconf-2.13-versioned-info.patch
 Patch5:		autoconf-2.13-automake14.patch
 Patch6:		autoconf-2.13-gfortran.patch
 
-Requires(post):	info-install
-Requires(preun):	info-install
-Requires:	gawk, m4, mktemp
-BuildRequires:	texinfo m4
-Conflicts:	autoconf2.5 <= 1:2.59-3mdk
-
+Requires:	gawk
+Requires:	m4
+Requires:	mktemp
+BuildRequires:	gcc-gfortran
+BuildRequires:	texinfo
+BuildRequires:	m4
 # for tests
-%if %docheck
+%if %{docheck}
 BuildRequires:	bison
 BuildRequires:	flex
 %endif
@@ -70,18 +58,14 @@ their use.
 %patch3 -p0
 %patch4 -p1 -b .parallel
 %patch5 -p1 -b .automake14
-case %{fortran_compiler} in
-*gfortran*)
 %patch6 -p1 -b .gfortran
-;;
-esac
 
 %build
-export F77=%{fortran_compiler}
+export F77=gfortran
 %configure --program-suffix=-%{version}
 %make
 
-%if %docheck
+%if %{docheck}
 make check	# VERBOSE=1
 %endif
 
@@ -100,14 +84,7 @@ cp install-sh %{buildroot}%{_datadir}/autoconf
 %clean
 rm -rf %{buildroot}
 
-%post
-%_install_info autoconf-%{version}.info
-
-%preun
-%_remove_install_info autoconf-%{version}.info
-
 %files
-%defattr(-,root,root)
 %doc README
 %{_bindir}/*
 %{_datadir}/%{pkgname}
