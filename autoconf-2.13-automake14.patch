@@ -1,0 +1,29 @@
+--- autoconf-2.13/autoreconf.sh.automake14	1999-01-05 21:28:40.000000000 +0800
++++ autoconf-2.13/autoreconf.sh	2004-05-22 04:00:58.614373808 +0800
+@@ -18,7 +18,7 @@
+ # 02111-1307, USA.
+ 
+ usage="\
+-Usage: autoreconf [-f] [-h] [--help] [-m dir] [--macrodir=dir]
++Usage: `basename $0` [-f] [-h] [--help] [-m dir] [--macrodir=dir]
+        [-l dir] [--localdir=dir] [--force] [--verbose] [--version]
+        [--cygnus] [--foreign] [--gnits] [--gnu] [-i] [--include-deps]"
+ 
+@@ -143,7 +143,7 @@
+ 	:
+      else
+ 	test $verbose = yes && echo running aclocal in $dir, creating $aclocal
+-	aclocal --output=$aclocal -I `echo $aclocal | sed 's,/*[^/]*$,,;s,^$,.,'`
++	aclocal-1.4 --output=$aclocal -I `echo $aclocal | sed 's,/*[^/]*$,,;s,^$,.,'`
+      fi
+   fi
+ 
+@@ -154,7 +154,7 @@
+      amforce=
+      test $force = no && amforce=--no-force
+      test $verbose = yes && echo running automake`test x"$amforce" = x || echo " ($amforce)"` in $dir
+-     automake $amforce $automake_mode $automake_deps
++     automake-1.4 $amforce $automake_mode $automake_deps
+   fi
+ 
+   test ! -f $aclocal && aclocal=

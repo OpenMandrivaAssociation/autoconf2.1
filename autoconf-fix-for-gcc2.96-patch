@@ -1,0 +1,11 @@
+--- ./acgeneral.m4.gege	Mon Oct 16 17:16:48 2000
++++ ./acgeneral.m4	Mon Oct 16 17:17:08 2000
+@@ -1818,7 +1818,7 @@
+ [#]line __oline__ "configure"
+ #include "confdefs.h"
+ ifelse(AC_LANG, CPLUSPLUS, [#ifdef __cplusplus
+-extern "C" void exit(int);
++extern "C" void exit(int) throw ();
+ #endif
+ ])dnl
+ [$1]
