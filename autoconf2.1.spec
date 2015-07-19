@@ -10,7 +10,7 @@ BuildRequires: gcc-gfortran
 Name:		%{pkgname}2.1
 Summary:	A GNU tool for automatically configuring source code
 Version:	2.13
-Release:	42
+Release:	43
 Epoch:		1
 License:	GPL
 Group:		Development/Other
