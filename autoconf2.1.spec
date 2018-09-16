@@ -10,7 +10,7 @@ BuildRequires: gcc-gfortran
 Name:		%{pkgname}2.1
 Summary:	A GNU tool for automatically configuring source code
 Version:	2.13
-Release:	43
+Release:	44
 Epoch:		1
 License:	GPL
 Group:		Development/Other
@@ -26,6 +26,7 @@ Patch3:		autoconf-fix-for-gcc2.96-patch
 Patch4:		autoconf-2.13-versioned-info.patch
 Patch5:		autoconf-2.13-automake14.patch
 Patch6:		autoconf-2.13-gfortran.patch
+Patch7:		find.pl-to-File::Find.patch
 
 Requires:	gawk, m4, mktemp
 BuildRequires:	texinfo m4
@@ -66,6 +67,7 @@ case %{fortran_compiler} in
 %patch6 -p1 -b .gfortran
 ;;
 esac
+%patch7 -p1 -b .findpl
 
 %build
 export F77=%{fortran_compiler}
