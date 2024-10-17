@@ -14,7 +14,7 @@ Release:	46
 Epoch:		1
 License:	GPL
 Group:		Development/Other
-URL:		http://www.gnu.org/software/autoconf/
+URL:		https://www.gnu.org/software/autoconf/
 BuildArch:	noarch
 
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{pkgname}/%{pkgname}-%{version}.tar.bz2
