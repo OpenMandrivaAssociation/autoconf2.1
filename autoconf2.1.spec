@@ -2,6 +2,11 @@
 
 # Define the Fortran compiler
 %define fortran_compiler gfortran
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: gcc-gfortran
 
 %define docheck 1
